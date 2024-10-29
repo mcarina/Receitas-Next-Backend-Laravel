@@ -1,0 +1,51 @@
+services:
+  app:
+    build:
+      args:
+        user: crud
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: crud/laravel-api
+    container_name: crud-api
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www/
+      - ./storage:/var/www/storage
+    restart: unless-stopped
+    networks:
+      - docker-laravel
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: always
+    ports:
+      - "70:70"
+    volumes:
+      - ./:/var/www/
+      - ./docker/nginx/:/etc/nginx/conf.d/
+    networks:
+      - docker-laravel
+
+  pgsql:
+    image: postgres:12.17
+    container_name: pgsql
+    restart: always
+    ports:
+      - "5420:5432"
+    volumes:
+      - ./.docker/postgresql:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - docker-laravel
+
+networks:
+  docker-laravel:
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.0.0/24"

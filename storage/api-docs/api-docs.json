@@ -1,0 +1,186 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API",
+        "description": "Api/swagger.json",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/users": {
+            "get": {
+                "summary": "lista de usuários(Admin)",
+                "operationId": "566aed8efb436ca506e0ef51a032ecd9",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Número da página para a paginação",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de usuários retornada com sucesso"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Cria um novo usuário (Admin)",
+                "operationId": "be551c1d694a01c164966f58bfa77013",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "johndoe@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuário cadastrado com sucesso"
+                    }
+                }
+            }
+        },
+        "/api/users/{id}": {
+            "get": {
+                "summary": "Retorna os detalhes de um usuário por ID.",
+                "operationId": "6f51bd5fa2dddcd25e44cfa53dcbd10a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do usuário para recuperar os detalhes",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalhes do usuário retornados com sucesso"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Atualiza os dados de um usuário existente(Admin)",
+                "operationId": "070e37fc9aff78ae73860751bc990ed3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do usuário a ser atualizado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "admin": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "assessor": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "p_escola": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "coordenador": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "coord_nig": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "secretaria": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "escola": {
+                                        "description": "Necessário se p_escola é verdadeiro",
+                                        "type": "string",
+                                        "example": "Escola ABC"
+                                    },
+                                    "password": {
+                                        "description": "Senha a ser atualizada, opcional",
+                                        "type": "string",
+                                        "example": "newpassword123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Campos atualizados com sucesso"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Deleta um usuário(Admin)",
+                "operationId": "0b4133ed462528a5e648b88ead11e929",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do usuário a ser deletado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Usuário deletado com sucesso"
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ]
+}
