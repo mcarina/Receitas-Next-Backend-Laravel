@@ -124,6 +124,17 @@
                 }
             }
         },
+        "/api/user-info": {
+            "get": {
+                "summary": "Retorna os detalhes de um usuário por ID.",
+                "operationId": "e7d2c9a68d87a954f0578d6c84a16044",
+                "responses": {
+                    "200": {
+                        "description": "Detalhes do usuário retornados com sucesso"
+                    }
+                }
+            }
+        },
         "/api/users/{id}": {
             "get": {
                 "summary": "Retorna os detalhes de um usuário por ID.",

@@ -61,6 +61,30 @@ class UserController extends Controller
 
     /**
      *     @OA\Get(
+     *     path="/api/user-info",
+     *     summary="Retorna os detalhes de um usuário por ID.",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Detalhes do usuário retornados com sucesso"
+     *     )
+     * )
+     * Método que retorna detalhes do usuário, por ID.
+     *
+     * @param \App\Models\User $user
+     */
+    public function showInfo(User $user): JsonResponse
+    {
+        $user = Auth::user();
+
+        return response()->json([
+            'status' => true,
+            'user' => $user,
+        ], 200);
+    }
+
+    
+    /**
+     *     @OA\Get(
      *     path="/api/users/{id}",
      *     summary="Retorna os detalhes de um usuário por ID.",
      *     @OA\Parameter(
