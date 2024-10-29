@@ -119,7 +119,13 @@ class UserController extends Controller
 
         try {
             User::create([ // Criando um novo usuário
-                'name' => $request->name,
+                'name' => $request->firstName . ' ' . $request->lastName,
+                'address1' => $request->address1,
+                'city' => $request->city,
+                'state' => $request->state,
+                'postalCode' => $request->postalCode,
+                'dateOfBirth' => $request->dateOfBirth,
+                'ssn' => $request->ssn,
                 'email' => $request->email,
                 'password' => bcrypt($request->password), // Criptografando a senha
             ]);
@@ -135,7 +141,7 @@ class UserController extends Controller
 
             return response()->json([
                 'status' => false,
-                'message' => "Erro ao cadastrar usuário, verifique o email",
+                'message' => "Erro ao cadastrar: " . $e->getMessage(),
             ], 400);
         }
     }
