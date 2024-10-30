@@ -11,6 +11,8 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/users',[UserController::class, 'store']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
+    //logout
+    Route::post('/logout', [LoginController::class, 'logout']);
     // Visualizar usuários
     Route::get('/users', [UserController::class, 'index']);
     //Atualizar dados do usuário

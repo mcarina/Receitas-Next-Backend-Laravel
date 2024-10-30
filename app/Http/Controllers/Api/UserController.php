@@ -17,7 +17,16 @@ use Illuminate\Support\Facades\Hash;
  *     title="API",
  *     version="1.0",
  *     description="Api/swagger.json"
- * )
+ * ),
+ *     @OA\SecurityScheme(
+ *         securityScheme="bearerAuth",
+ *         type="http",
+ *         scheme="bearer",
+ *         bearerFormat="JWT",
+ *         in="header",
+ *         name="Authorization",
+ *         description="Adicione o token JWT no cabeçalho da requisição. Exemplo: 'Authorization: Bearer {token}'"
+ *     )
  * 
  */
 

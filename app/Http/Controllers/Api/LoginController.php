@@ -60,17 +60,7 @@ class LoginController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/logout/{user}",
-     *     @OA\Parameter(
-     *         name="user",
-     *         in="path",
-     *         description="ID do usuário",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="integer",
-     *             example=1
-     *         )
-     *     ),
+     *     path="/api/logout",
      *     @OA\Response(
      *         response=201,
      *         description="Logout bem-sucedido"

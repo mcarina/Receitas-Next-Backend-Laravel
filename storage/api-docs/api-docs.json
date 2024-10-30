@@ -41,21 +41,9 @@
                 }
             }
         },
-        "/api/logout/{user}": {
+        "/api/logout": {
             "post": {
-                "operationId": "020ae3079882e2276435982e21aa2f97",
-                "parameters": [
-                    {
-                        "name": "user",
-                        "in": "path",
-                        "description": "ID do usuário",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "example": 1
-                        }
-                    }
-                ],
+                "operationId": "8f9216a1ffa35b50dda879998d4b9213",
                 "responses": {
                     "201": {
                         "description": "Logout bem-sucedido"
@@ -248,6 +236,18 @@
                         "description": "Usuário deletado com sucesso"
                     }
                 }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "description": "Adicione o token JWT no cabeçalho da requisição. Exemplo: 'Authorization: Bearer {token}'",
+                "name": "Authorization",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
             }
         }
     },
