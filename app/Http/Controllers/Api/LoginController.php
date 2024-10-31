@@ -72,7 +72,7 @@ class LoginController extends Controller
      *
     destroi o token de acesso do usuário.**/
 
-    public function logout(User $user): JsonResponse
+    public function logout(): JsonResponse
     {
         try {
             $user = Auth::user();
