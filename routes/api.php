@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\RecipesController;
 
 //login e logout
 Route::post('/login', [LoginController::class, 'login']);
@@ -13,6 +14,10 @@ Route::post('/users',[UserController::class, 'store']);
 Route::group(['middleware' => 'auth:sanctum'], function () {
     //logout
     Route::post('/logout', [LoginController::class, 'logout']);
+
+    /**
+    User Controller
+     */
     // Visualizar usuários
     Route::get('/users', [UserController::class, 'index']);
     //Atualizar dados do usuário
@@ -24,5 +29,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     //Apaga um usuário
     Route::delete('/users/{user}',[UserController::class, 'destroy']);
 
+    /**
+    Recipes Controller
+     */
+    Route::get('/recipes', [RecipesController::class, 'index']);
 
 });
