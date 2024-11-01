@@ -13,10 +13,12 @@ Este projeto é uma API desenvolvida com Laravel 11, focada em um CRUD (Create, 
 Atualmente, o projeto possui funcionalidades, como autenticação.
 
 ### Funcionalidades:
-- Criação de usuários (Create);
-- Listar usuários (Read);
-- Atualização (Update);
+- Criação de novas receitas (Create);
+- Listar de receitas (Read);
+- Atualizar as receitas (Update);
 - Exclusão(Delete).
+
+-Criação de usuários (Create);
 
 ### Tecnologias Utilizadas:
 - PHP 8.2;
