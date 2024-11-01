@@ -10,6 +10,8 @@ use App\Http\Controllers\Api\RecipesController;
 Route::post('/login', [LoginController::class, 'login']);
 //Cadastro de usuários
 Route::post('/users',[UserController::class, 'store']);
+// todas as receitas
+Route::get('/recipes', [RecipesController::class, 'index']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     //logout
@@ -32,6 +34,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     /**
     Recipes Controller
      */
-    Route::get('/recipes', [RecipesController::class, 'index']);
 
 });
