@@ -17,7 +17,7 @@ Atualmente, o projeto possui funcionalidades, como autenticação.
 - Criação de novas receitas (Create);
 - Listar de receitas (Read);
 - Atualizar as receitas (Update);
-- Exclusão(Delete).
+- Exclusão de receitas(Delete).
 
 ### Tecnologias Utilizadas:
 - PHP 8.2;
