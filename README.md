@@ -15,7 +15,7 @@ Atualmente, o projeto possui funcionalidades, como autenticação.
 ### Funcionalidades:
 - Criação de usuários (Create);
 - Criação de novas receitas (Create);
-- Listar de receitas (Read);
+- Listar as receitas (Read);
 - Atualizar as receitas (Update);
 - Exclusão de receitas(Delete).
 
