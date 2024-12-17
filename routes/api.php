@@ -34,5 +34,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     /**
     Recipes Controller
      */
+    Route::post('/recipes', [RecipesController::class, 'store']);
 
 });
