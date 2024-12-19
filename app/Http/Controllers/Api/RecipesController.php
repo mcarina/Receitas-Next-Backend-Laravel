@@ -37,45 +37,55 @@ class RecipesController extends Controller
         ], 200);
     }
 
-    public function store(StoreRecipeRequest  $request): JsonResponse
+    public function store(StoreRecipeRequest $request): JsonResponse
     {
-        $validatedData = $request->validated();
-        $userId = Auth::id();
-
-        // Verificar se já existe uma receita com o mesmo título e usuário
-        $existingRecipe = Recipes::where('title', $validatedData['title'])
-                            ->where('user_id', $userId)
-                            ->first();
-
-        if ($existingRecipe) {
-            return response()->json([
-                'message' => 'A recipe with this title already exists for this user.',
-                'data' => $existingRecipe,
-            ], 409);
-        }
-
-        // Criar a nova receita
-        $recipe = Recipes::create([
-            'title' => $validatedData['title'],
-            'description' => $validatedData['description'],
-            'preparation_method' => $validatedData['preparation_method'],
-            'category_id' => $validatedData['category_id'],
-            'user_id' => $userId, 
-        ]);
-
-        // Associar os ingredientes à receita
-        foreach ($validatedData['ingredients'] as $ingredientData) {
-            Ingredients::create([
-                'name' => $ingredientData['name'],
-                'amount' => $ingredientData['amount'],
-                'recipe_id' => $recipe->id,
+        try {
+            $validatedData = $request->validated();
+            $userId = Auth::id();
+    
+            // Verificar se já existe uma receita com o mesmo título e usuário
+            $existingRecipe = Recipes::where('title', $validatedData['title'])
+                                    ->where('user_id', $userId)
+                                    ->first();
+    
+            if ($existingRecipe) {
+                return response()->json([
+                    'message' => 'A recipe with this title already exists for this user.',
+                    'data' => $existingRecipe,
+                ], 409);
+            }
+    
+            // Criar a nova receita
+            $recipe = Recipes::create([
+                'title' => $validatedData['title'],
+                'description' => $validatedData['description'],
+                'preparation_method' => $validatedData['preparation_method'],
+                'category_id' => $validatedData['category_id'],
+                'user_id' => $userId, 
             ]);
+    
+            // Associar os ingredientes à receita
+            foreach ($validatedData['ingredients'] as $ingredientData) {
+                Ingredients::create([
+                    'name' => $ingredientData['name'],
+                    'amount' => $ingredientData['amount'],
+                    'recipe_id' => $recipe->id,
+                ]);
+            }
+    
+            return response()->json([
+                'status' => true,
+                'message' => 'Recipe created successfully!',
+            ], 201);
+    
+        } catch (\Exception $e) {
+            // Em caso de erro, retorna um erro genérico
+            return response()->json([
+                'status' => false,
+                'error' => $e->getMessage(),
+            ], 500);
         }
-
-        return response()->json([
-            'message' => 'Recipe created successfully!',
-            'data' => $recipe,
-        ], 201);
     }
+    
     
 }
