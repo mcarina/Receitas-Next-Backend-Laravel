@@ -17,8 +17,8 @@ class RecipesController extends Controller
         $recipes = Recipes::with(['category', 'user', 'ingredients'])->orderBy('id', 'ASC')->paginate(5);
     
         $recipes->transform(function ($item) {
-            $item->category = $item->category->category ?? 'N/A'; // nome da categoria
-            $item->user_id = $item->user->name ?? 'N/A'; // nome do usuário
+            $item->category = $item->category->category ?? 'N/A'; 
+            $item->user_id = $item->user->name ?? 'N/A'; 
             
             // Adiciona os ingredientes ao item
             $item->ingredients = $item->ingredients->map(function ($ingredient) {
@@ -85,6 +85,27 @@ class RecipesController extends Controller
                 'error' => $e->getMessage(),
             ], 500);
         }
+    }
+    
+    public function show(Recipes $id): JsonResponse
+    {
+        $recipe = Recipes::with(['category', 'user', 'ingredients'])->findOrFail($id->id);
+    
+        $recipe->category = $recipe->category->category ?? 'N/A';
+        $recipe->user_id = $recipe->user->name ?? 'N/A';
+    
+        // Adiciona os ingredientes ao item
+        $recipe->ingredients = $recipe->ingredients->map(function ($ingredient) {
+            return [
+                'name' => $ingredient->name,
+                'amount' => $ingredient->amount,
+            ];
+        });
+    
+        return response()->json([
+            'status' => true,
+            'recipe' => $recipe,
+        ], 200);
     }
     
     
