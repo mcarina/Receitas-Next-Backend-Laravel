@@ -89,23 +89,34 @@ class RecipesController extends Controller
     
     public function show(Recipes $id): JsonResponse
     {
-        $recipe = Recipes::with(['category', 'user', 'ingredients'])->findOrFail($id->id);
-    
-        $recipe->category = $recipe->category->category ?? 'N/A';
-        $recipe->user_id = $recipe->user->name ?? 'N/A';
-    
-        // Adiciona os ingredientes ao item
-        $recipe->ingredients = $recipe->ingredients->map(function ($ingredient) {
-            return [
-                'name' => $ingredient->name,
-                'amount' => $ingredient->amount,
-            ];
-        });
-    
-        return response()->json([
-            'status' => true,
-            'recipe' => $recipe,
-        ], 200);
+        try {
+            // Tentando encontrar a receita com os relacionamentos
+            $recipe = Recipes::with(['category', 'user', 'ingredients'])->findOrFail($id->id);
+        
+            // Processando os dados da categoria e usuário
+            $recipe->category = $recipe->category->category ?? 'N/A';
+            $recipe->user_id = $recipe->user->name ?? 'N/A';
+        
+            // Adicionando os ingredientes ao item
+            $recipe->ingredients = $recipe->ingredients->map(function ($ingredient) {
+                return [
+                    'name' => $ingredient->name,
+                    'amount' => $ingredient->amount,
+                ];
+            });
+        
+            // Retorna a resposta com os dados da receita
+            return response()->json([
+                'status' => true,
+                'recipe' => $recipe,
+            ], 200);
+        } catch (\Exception $e) {
+            // Captura qualquer exceção que ocorra e retorna um erro apropriado
+            return response()->json([
+                'status' => false,
+                'message' => 'Erro ao buscar a receita: ' . $e->getMessage(),
+            ], 500);
+        }
     }
     
     
