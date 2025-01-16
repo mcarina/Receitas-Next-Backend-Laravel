@@ -12,6 +12,9 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/users',[UserController::class, 'store']);
 // todas as receitas
 Route::get('/recipes', [RecipesController::class, 'index']);
+// campo de pesquise
+Route::get('/search-recipes', [RecipesController::class, 'search']);
+
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     //logout
@@ -36,6 +39,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
      */
     Route::post('/recipes', [RecipesController::class, 'store']);
     Route::get('/recipes/{id}', [RecipesController::class, 'show']);
-    Route::get('/search-recipes', [RecipesController::class, 'search']);
 
 });
