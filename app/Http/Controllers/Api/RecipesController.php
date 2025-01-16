@@ -122,11 +122,17 @@ class RecipesController extends Controller
     public function search(Request $request)
     {
         $query = $request->get('query');
-        
+    
+        if (!$query) {
+            return response()->json([]);
+        }
+    
         $recipes = Recipes::where('title', 'LIKE', '%' . $query . '%')
             ->orWhere('description', 'LIKE', '%' . $query . '%')
+            ->limit(10) // Limite para 10 sugestões
+            ->orderBy('title', 'ASC') // Ordenação por título
             ->get();
-
+    
         return response()->json($recipes);
     }
     
