@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\RecipesController;
 
+
 //login e logout
 Route::post('/login', [LoginController::class, 'login']);
 //Cadastro de usuários
@@ -39,5 +40,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
      */
     Route::post('/recipes', [RecipesController::class, 'store']);
     Route::get('/recipes/{id}', [RecipesController::class, 'show']);
+    Route::delete('/recipes/{recipe}', [RecipesController::class, 'destroy']);
 
 });

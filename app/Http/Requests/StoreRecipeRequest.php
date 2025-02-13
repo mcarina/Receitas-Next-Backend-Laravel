@@ -27,11 +27,15 @@ class StoreRecipeRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'preparation_method' => 'nullable|string',
+            'preparation_method' => 'required|string',
             'category_id' => 'required|exists:categories,id',
-            'ingredients' => 'required|array', // Espera um array de ingredientes
-            'ingredients.*.name' => 'required|string|max:255', // Valida o nome de cada ingrediente
-            'ingredients.*.amount' => 'nullable|string', // Valida a quantidade de cada ingrediente
+            'time' => 'nullable|integer', // Garantir que 'time' seja um inteiro ou nulo
+            'type_time' => 'nullable|string', // Garantir que 'type_time' seja uma string ou nulo
+            'porcoes' => 'nullable|integer', // Garantir que 'porcoes' seja um inteiro ou nulo
+            'status' => 'nullable|string|in:ativo,inativo', // Garantir que 'status' seja um valor válido
+            'ingredients' => 'required|array',
+            'ingredients.*.name' => 'required|string',
+            'ingredients.*.amount' => 'required|string',
         ];
     }
 

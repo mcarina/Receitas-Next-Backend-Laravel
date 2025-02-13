@@ -16,6 +16,10 @@ class Recipes extends Model
         'preparation_method',
         'category_id',
         'user_id',
+        'time',      
+        'type_time',  
+        'porcoes',    
+        'status', 
         'created_at',
         'updated_at',
     ];    
