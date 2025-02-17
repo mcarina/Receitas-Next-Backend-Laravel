@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\RecipesController;
 use App\Http\Controllers\Api\SavedController;
+use App\Http\Controllers\Api\ImagesController;
 
 //login e logout
 Route::post('/login', [LoginController::class, 'login']);
@@ -49,4 +50,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/save-recipe', [SavedController::class, 'index']);
     Route::post('/save-recipe', [SavedController::class, 'saveRecipe']);
 
+    /**
+    Imagem Controller
+     */
+    Route::post('/img-upload/{recipe_id}', [ImagesController::class, 'upload']);
 });

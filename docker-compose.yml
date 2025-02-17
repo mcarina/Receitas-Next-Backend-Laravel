@@ -43,6 +43,22 @@ services:
     networks:
       - docker-laravel
 
+  minio:
+    image: minio/minio
+    container_name: minio_rcp
+    command: server /data --console-address ":9001"
+    restart: always
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    volumes:
+      - ./minio_data:/data
+    ports:
+      - "${PORT:-9000}:9000" # Alterei as portas para evitar conflitos
+      - "${PORT_ADMIN:-9001}:9001"
+    networks:
+      - docker-laravel
+
 networks:
   docker-laravel:
     ipam:
