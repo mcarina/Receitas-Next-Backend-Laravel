@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\RecipesController;
-
+use App\Http\Controllers\Api\SavedController;
 
 //login e logout
 Route::post('/login', [LoginController::class, 'login']);
@@ -41,5 +41,12 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/recipes', [RecipesController::class, 'store']);
     Route::get('/recipes/{id}', [RecipesController::class, 'show']);
     Route::delete('/recipes/{recipe}', [RecipesController::class, 'destroy']);
+    // Route::put('/recipes/{id}',[RecipesController::class, 'update']);
+
+    /**
+    Saved Controller
+     */
+    Route::get('/save-recipe', [SavedController::class, 'index']);
+    Route::post('/save-recipe', [SavedController::class, 'saveRecipe']);
 
 });

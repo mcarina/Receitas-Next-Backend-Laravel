@@ -40,4 +40,10 @@ class Recipes extends Model
     {
         return $this->hasMany(Ingredients::class, 'recipe_id'); // 'recipe_id' é a chave estrangeira em ingredients
     }
+
+    public function savedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'save_recipes');
+    }
+
 }

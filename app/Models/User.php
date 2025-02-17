@@ -54,9 +54,9 @@ class User extends Authenticatable
         ];
     }
 
-    public function coordenadores()
+    public function savedRecipes()
     {
-        return $this->hasMany(Coordenadores::class);
+        return $this->belongsToMany(Recipes::class, 'save_recipes', 'user_id', 'recipe_id');
     }
 
 }
