@@ -15,7 +15,7 @@ class RecipesController extends Controller
 {
     public function index(): JsonResponse
     {
-        $recipes = Recipes::with(['category', 'user', 'ingredients'])->orderBy('id', 'ASC')->paginate(6);
+        $recipes = Recipes::with(['category', 'user', 'ingredients'])->orderBy('id', 'DESC')->paginate(6);
     
         $recipes->transform(function ($item) {
             $item->category = $item->category->category ?? 'N/A'; 
