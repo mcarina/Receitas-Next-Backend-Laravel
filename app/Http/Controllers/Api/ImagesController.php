@@ -44,7 +44,7 @@ class ImagesController extends Controller
             if (!$path) {
                 return response()->json(['error' => 'Erro ao fazer upload da imagem'], 500);
             }
-            $url = Storage::disk('s3')->url($fileName); // Gera a URL pública
+            $url = Storage::disk('s3')->url($fileName); //URL pública
 
             // Salva no banco
             $bucketImg = BucketImg::create([
