@@ -27,6 +27,13 @@ Atualmente, o projeto possui funcionalidades, como autenticação.
 - Documentação de endpoints com Swagger.
 
 
+## 📌 Estrutura do Banco de Dados
+
+Este documento descreve a estrutura do banco de dados para um sistema de receitas culinárias, incluindo entidades, atributos e relacionamentos.
+
+![image](https://github.com/user-attachments/assets/d0f79446-1c9f-485f-bf7a-5152f65fb0cd)
+
+
 ## Instruções de Instalação:
 - Com docker.
 1. ```
@@ -54,11 +61,10 @@ Atualmente, o projeto possui funcionalidades, como autenticação.
 > [!NOTE]
 > Não esqueça de configurar seu arquivo .env e criar seu app_key
 
+## 🚀 Considerações Finais
 
+Este banco de dados foi modelado para suportar um sistema de receitas robusto, permitindo que os usuários criem, salvem e compartilhem receitas, além de adicionar imagens e organizar por categorias.
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
 ## License
 
